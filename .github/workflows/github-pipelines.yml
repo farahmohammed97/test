@@ -7,9 +7,14 @@ on:
   pull_request:
     branches:
       - main
+
+env:
+    SECRET_KEY: ${{ secrets.SECRET_KEY }}
+
 jobs:
   install-and-test:
     runs-on: ubuntu-latest
+    environment: test
 
     steps:
       - name: Checkout code
@@ -19,6 +24,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y python3-pip
           pip3 install -r requirements.txt
+      - name: print variable
+        run: |
+          echo "SECRET_KEY is ${SECRET_KEY}"
       - name: Test
         run: |
           python manage.py migrate
