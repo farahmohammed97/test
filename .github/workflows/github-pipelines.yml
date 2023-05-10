@@ -43,6 +43,7 @@ jobs:
           git fetch origin pull/${{ github.event.pull_request.number }}/merge --no-tags --no-recurse-submodules
           git merge FETCH_HEAD -m "Merge pull request #${{ github.event.pull_request.number }}"
           git push origin main
+          
 
 #      - name: Push changes
 #        uses: ad-m/github-push-action@v0.5.0
