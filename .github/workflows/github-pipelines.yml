@@ -37,14 +37,15 @@ jobs:
         uses: actions/checkout@v3.1.0
       - name: Merge
         run: |
+          git config --global safe.directory '*'
           git config --global user.name "${{ github.repository_owner }}"
           git config --global user.email "aseel.ashraf@icloud.com"
           git fetch origin pull/${{ github.event.pull_request.number }}/merge --no-tags --no-recurse-submodules
           git merge FETCH_HEAD -m "Merge pull request #${{ github.event.pull_request.number }}"
-          git config --global --add safe.directory /__w/softylus-technologies/salis-django
+          git push origin main
 
-      - name: Push changes
-        uses: ad-m/github-push-action@v0.5.0
-        with:
-          branch: main
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+#      - name: Push changes
+#        uses: ad-m/github-push-action@v0.5.0
+#        with:
+#          branch: main
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
